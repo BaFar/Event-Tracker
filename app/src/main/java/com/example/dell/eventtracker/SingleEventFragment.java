@@ -1,14 +1,17 @@
 package com.example.dell.eventtracker;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -107,8 +110,36 @@ public class SingleEventFragment extends Fragment implements View.OnClickListene
                 }
                 break;
             case R.id.add_expenseBtn:
-                Toast.makeText(getActivity(), "Add Expense Btn clicked", Toast.LENGTH_SHORT).show();
-                break;
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                final View dview=inflater.inflate(R.layout.add_expense, null);
+                builder.setView(dview)
+                        // Add action buttons
+                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                Toast.makeText(getActivity(), "positive Button Clicked", Toast.LENGTH_SHORT).show();
+                                EditText purposeET = (EditText) dview.findViewById(R.id.expense_purposeET);
+                                EditText amountET = (EditText) dview.findViewById(R.id.expense_amountET);
+                                String purpose= purposeET.getText().toString();
+                                String amount= amountET.getText().toString();
+                                Toast.makeText(getContext(), ""+purpose+" "+amount, Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                              //  LoginDialogFragment.this.getDialog().cancel();
+                                dialog.cancel();
+
+                            }
+                        });
+                AlertDialog dialog =  builder.create();
+                dialog.show();
+
+
+
+            break;
             case R.id.add_momentBtn:
                 Toast.makeText(getActivity(), "Add Moment Btn clicked", Toast.LENGTH_SHORT).show();
                 break;
