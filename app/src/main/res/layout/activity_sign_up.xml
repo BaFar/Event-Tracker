@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dell.eventtracker.LogInActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="On Sign Up Activity"
+        android:layout_alignParentBottom="true"/>
+
+    <EditText
+        android:id="@+id/emailET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="enter your email" />
+
+    <EditText
+        android:id="@+id/passwordET"
+        android:layout_width="match_parent"
+        android:inputType="textPassword"
+        android:layout_below="@id/emailET"
+        android:layout_height="wrap_content"
+        android:hint="enter your password" />
+    <Button
+        android:id="@+id/saveBtn"
+        android:text="sign up"
+        android:onClick="signup"
+        android:layout_below="@id/passwordET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:layout_below="@id/saveBtn"
+        android:text="Already Have an account?Please! Log In"
+        android:onClick="moveToLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

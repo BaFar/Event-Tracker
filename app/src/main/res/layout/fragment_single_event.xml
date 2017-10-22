@@ -1,0 +1,150 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dell.eventtracker.SingleEventFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/event_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Rangamati" />
+
+        <TextView
+            android:id="@+id/from_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/event_name"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="17dp"
+            android:text="From" />
+
+        <TextView
+            android:id="@+id/from_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/from_text"
+            android:layout_below="@+id/from_text"
+            android:layout_marginTop="20dp"
+            android:text="29/08/2017" />
+
+        <TextView
+            android:id="@+id/to_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/from_text"
+            android:layout_marginEnd="20dp"
+            android:text="To"
+            android:layout_toEndOf="@+id/event_name" />
+
+        <TextView
+            android:id="@+id/to_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/from_date"
+            android:layout_alignStart="@+id/to_text"
+            android:layout_marginRight="20dp"
+            android:text="13/09/2017" />
+
+        <TextView
+            android:id="@+id/event_est_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/from_date"
+            android:layout_below="@+id/from_date"
+            android:layout_marginTop="42dp"
+            android:text="Budget" />
+
+        <TextView
+            android:id="@+id/current_expense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current Expense: 500taka"
+            android:layout_above="@+id/expense_progressbar"
+            android:layout_alignStart="@+id/to_date"
+            android:layout_alignTop="@id/event_est_budget"/>
+
+        <ProgressBar
+            android:id="@+id/expense_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/event_est_budget"
+            android:layout_centerHorizontal="true"/>
+        <RelativeLayout
+            android:id="@+id/expense_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/expense_progressbar"
+            android:layout_alignParentLeft="true">
+
+            <Button
+                android:id="@+id/expense_listBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="See Expenses"
+                />
+            <Button
+                android:id="@+id/add_expenseBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@id/expense_listBtn"
+                android:text="add Event"
+                />
+
+            <ListView
+                android:id="@+id/expense_listview"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/expense_listBtn"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/moment_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/expense_layout">
+
+            <Button
+                android:id="@+id/moment_listBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="See Moments"/>
+            <Button
+                android:id="@+id/add_momentBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Moment"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@id/moment_listBtn"/>
+            <ListView
+                android:id="@+id/moment_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/moment_listBtn"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</FrameLayout>
