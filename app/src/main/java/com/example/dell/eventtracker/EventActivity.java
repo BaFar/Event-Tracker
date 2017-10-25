@@ -19,19 +19,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class EventActivity extends AppCompatActivity  implements AddEventFragment.CreateEvent{
+public class EventActivity extends AppCompatActivity  implements AddEventFragment.CreateEvent,SingleEventFragment.EventInterface {
 
     private ArrayList<Event> cEventList;
     private ArrayList<Event> pEventList;
     private FragmentManager fm= getSupportFragmentManager();
     private FragmentTransaction ft ;
     private DatabaseReference databaseReference;
+    private String userId;
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseUser user= auth.getCurrentUser();
 
@@ -46,7 +46,7 @@ public class EventActivity extends AppCompatActivity  implements AddEventFragmen
 
 
         mBottomNV = (BottomNavigationView) findViewById(R.id.navigation);
-        String userId = user.getUid();
+         userId = user.getUid();
         cEventList = new ArrayList<Event>();
        // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("EventList");
@@ -118,29 +118,29 @@ public class EventActivity extends AppCompatActivity  implements AddEventFragmen
                 return true;
             }
         });
+        mBottomNV.setSelectedItemId(R.id.add_event_menu);
 
 
     }
     @Override
-    public void createEventClicked(String destination, int budget, String fromDate, String toDate) {
+    public void createEventClicked(String destination, int budget, String fromDate, String toDate, double lattitude, double longitude) {
 
         Toast.makeText(this, ""+destination, Toast.LENGTH_SHORT).show();
         Toast.makeText(this, ""+fromDate, Toast.LENGTH_SHORT).show();
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId).child("EventList");
        String keyValue=databaseReference.push().getKey();
 
-
-
-
-
-        Event event = new Event(destination,fromDate,toDate, budget);
+        Event event = new Event(destination,fromDate,toDate, budget,lattitude,longitude);
         event.setKey(keyValue);
-        event.addExpense(new Expense("Breakfast",60));
+        event.addExpense(new Expense("Breakfast",60,"27/12/17 2:30pm"));
 
-        event.addMoment(new Moment("Dinner with local food",1));
+        event.addMoment(new Moment("Dinner with local food","simple path","27/12/17 2:30pm"));
         databaseReference.child(keyValue).setValue(event);
 
-        event.addExpense(new Expense("Dinner",90));
-        event.addMoment(new Moment("break fast with local food",1));
+        event.addExpense(new Expense("Dinner",90,"27/12/17 2:30pm"));
+        event.addMoment(new Moment("break fast with local food","simple path","27/12/17 2:30pm"));
+
         databaseReference.child(keyValue).setValue(event);
 
 
@@ -161,6 +161,54 @@ public class EventActivity extends AppCompatActivity  implements AddEventFragmen
     }
 
 
+    @Override
+    public void itemExpenseAdd(String eventKey, int position, String noteText,double amount,String curentTime) {
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("EventList").child(eventKey);
+
+            Event event =cEventList.get(position);
+            event.addExpense(new Expense(noteText,amount,curentTime));
+            databaseReference.setValue(event);
+            Toast.makeText(this, "Expense Added", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    @Override
+    public void itemMomentAdd(String eventKey, int position, String noteText, String imagePath, String currentTime) {
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("EventList").child(eventKey);
+        Event event = cEventList.get(position);
+        event.addMoment(new Moment(noteText,imagePath,currentTime));
+        databaseReference.setValue(event);
+        Toast.makeText(this, "Moment Added", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void eventEdit(String eventKey, int eventPosition, String Destination, String fromDate, String toDate, int budget,double lat,double lon) {
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("EventList").child(eventKey);
+        Event event= cEventList.get(eventPosition);
+        event.setDestination(Destination);
+        event.setFromDate(fromDate);
+        event.setToDate(toDate);
+        event.setBudget(budget);
+        databaseReference.setValue(event);
+        Toast.makeText(this, "Event Edited", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void eventDelete(String eventKey, int eventPosition) {
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(userId)
+                .child("EventList").child(eventKey);
+        databaseReference.removeValue();
+        mBottomNV.setSelectedItemId(R.id.comming_event_menu);
+        Toast.makeText(this, "event Deleted", Toast.LENGTH_SHORT).show();
+
+
+    }
 }
 
 /*

@@ -31,10 +31,10 @@ public class MomentAdapter extends ArrayAdapter<Moment> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.row,parent,false);
 
-        TextView purposeTV = (TextView) convertView.findViewById(R.id.note_text);
-        TextView momentValueTV= (TextView) convertView.findViewById(R.id.note_value);
-        purposeTV.setText(momentList.get(position).getMomentNote());
-        momentValueTV.setText(String.valueOf(momentList.get(position).getImageNO()));
+        TextView momentNoteTV = (TextView) convertView.findViewById(R.id.note_text);
+        TextView imagePathTV= (TextView) convertView.findViewById(R.id.note_value);
+        momentNoteTV.setText(momentList.get(position).getMomentNote());
+        imagePathTV.setText(momentList.get(position).getImagePath());
         return convertView;
     }
 }

@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignBaseline="@id/expense_listBtn"
-                android:text="add Event"
+                android:text="add Expense"
                 />
 
             <ListView
@@ -143,6 +143,44 @@
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/moment_listBtn"
                 android:visibility="gone" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/update_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true">
+
+            <Button
+                android:id="@+id/event_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:text="Delete"/>
+            <Button
+                android:id="@+id/event_edit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/event_delete_btn"
+                android:text="Edit"/>
+            <Button
+                android:id="@+id/near_byBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/event_edit_btn"
+                android:text="Near By"/>
+            <Button
+                android:id="@+id/weathrBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/near_byBtn"
+                android:text="Weather"/>
+
 
         </RelativeLayout>
     </RelativeLayout>

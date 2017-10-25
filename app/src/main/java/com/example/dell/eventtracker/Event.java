@@ -12,21 +12,25 @@ import java.util.Date;
 
 public class Event implements Parcelable {
     private String destination;
+    private double lattitude;
+    private double longitude;
     private String fromDate;
     private String toDate;
     private int budget;
     private String key;
-    public int totalExpense=0;
+    public double totalExpense=0;
 
 
     private ArrayList<Expense> expenseList;
     private ArrayList<Moment> momentList;
 
-    public Event(String destination, String fromDate, String toDate, int budget) {
+    public Event(String destination, String fromDate, String toDate, int budget, double lattitude,double longitude) {
         this.destination = destination;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.budget = budget;
+        this.lattitude = lattitude;
+        this.longitude = longitude;
         expenseList = new ArrayList<>();
         momentList = new ArrayList<>();
     }
@@ -68,6 +72,22 @@ public class Event implements Parcelable {
 
     }
 
+    public double getLattitude() {
+        return lattitude;
+    }
+
+    public void setLattitude(double lattitude) {
+        this.lattitude = lattitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
     public ArrayList<Expense> getExpenseList() {
         return expenseList;
     }
@@ -81,13 +101,11 @@ public class Event implements Parcelable {
     public ArrayList<Moment> getMomentList() {
         return momentList;
     }
-
-
     public void addMoment(Moment moment){
         this.momentList.add(moment);
     }
 
-    public  int getTotalExpense() {
+    public  double getTotalExpense() {
         return totalExpense;
     }
 
@@ -106,6 +124,8 @@ public class Event implements Parcelable {
         toDate = source.readString();
         budget = source.readInt();
         key = source.readString();
+        lattitude = source.readDouble();
+        longitude = source.readDouble();
         expenseList = source.createTypedArrayList(Expense.CREATOR);
         momentList = source.createTypedArrayList(Moment.CREATOR);
 
@@ -123,6 +143,8 @@ public class Event implements Parcelable {
         dest.writeString(toDate);
         dest.writeInt(budget);
         dest.writeString(key);
+        dest.writeDouble(lattitude);
+        dest.writeDouble(longitude);
         dest.writeTypedList(expenseList);
         dest.writeTypedList(momentList);
     }

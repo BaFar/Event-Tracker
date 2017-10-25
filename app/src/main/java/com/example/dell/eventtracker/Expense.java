@@ -11,15 +11,17 @@ public class Expense  implements Parcelable{
 
 
     private String expensePurpose;
-    private int expenseAmount;
+    private double expenseAmount;
+    private String expenseTime;
 
+    public String getExpenseTime() {
+        return expenseTime;
+    }
 
-
-
-
-    public Expense(String expensePurpose, int expenseAmount) {
+    public Expense(String expensePurpose, double expenseAmount, String expenseTime) {
         this.expensePurpose = expensePurpose;
         this.expenseAmount = expenseAmount;
+        this.expenseTime = expenseTime;
 
     }
 
@@ -29,6 +31,7 @@ public class Expense  implements Parcelable{
     protected Expense(Parcel in) {
         expensePurpose = in.readString();
         expenseAmount = in.readInt();
+        expenseTime = in.readString();
     }
 
     public static final Creator<Expense> CREATOR = new Creator<Expense>() {
@@ -47,16 +50,10 @@ public class Expense  implements Parcelable{
         return expensePurpose;
     }
 
-    public void setExpensePurpose(String expensePurpose) {
-        this.expensePurpose = expensePurpose;
-    }
 
-    public int getExpenseAmount() {
+
+    public double getExpenseAmount() {
         return expenseAmount;
-    }
-
-    public void setExpenseAmount(int expenseAmount) {
-        this.expenseAmount = expenseAmount;
     }
 
     @Override
@@ -68,7 +65,8 @@ public class Expense  implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
 
         dest.writeString(this.expensePurpose);
-        dest.writeInt(this.expenseAmount);
+        dest.writeDouble(this.expenseAmount);
+        dest.writeString(this.expenseTime);
 
     }
 }

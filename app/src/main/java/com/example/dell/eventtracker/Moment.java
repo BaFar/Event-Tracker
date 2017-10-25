@@ -9,16 +9,19 @@ import android.os.Parcelable;
 
 public class Moment implements Parcelable{
     private String momentNote;
-    private int imageNO; /*just demo*/
+    private String imagePath;
+    private String momentTime;
 
-    public Moment(String momentNote, int imageNO) {
+    public Moment(String momentNote, String imagePath,String momentTime) {
         this.momentNote = momentNote;
-        this.imageNO = imageNO;
+        this.imagePath = imagePath;
+        this.momentTime = momentTime;
     }
 
     protected Moment(Parcel in) {
         momentNote = in.readString();
-        imageNO = in.readInt();
+        imagePath = in.readString();
+        momentTime = in.readString();
     }
 
     public static final Creator<Moment> CREATOR = new Creator<Moment>() {
@@ -35,7 +38,8 @@ public class Moment implements Parcelable{
 
     protected void Moment(Parcel in){
         momentNote = in.readString();
-        imageNO = in.readInt();
+        imagePath = in.readString();
+        momentTime = in.readString();
     }
 
     @Override
@@ -49,23 +53,19 @@ public class Moment implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.momentNote);
-        dest.writeInt(this.imageNO);
-
+        dest.writeString(this.imagePath);
+        dest.writeString(this.momentTime);
     }
 
     public String getMomentNote() {
         return momentNote;
     }
 
-    public void setMomentNote(String momentNote) {
-        this.momentNote = momentNote;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public int getImageNO() {
-        return imageNO;
-    }
-
-    public void setImageNO(int imageNO) {
-        this.imageNO = imageNO;
+    public String getMomentTime() {
+        return momentTime;
     }
 }

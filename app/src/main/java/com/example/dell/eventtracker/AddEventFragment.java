@@ -34,6 +34,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener{
     private Button createBtn,fromDateBtn,toDateBtn;
     private String destination,fdate,tdate;
     private int budget;
+    private  double lat,lon;
     private Calendar calendar;
     private int year,month,day;
 
@@ -78,18 +79,20 @@ public class AddEventFragment extends Fragment implements View.OnClickListener{
 
             case R.id.fromDateValue:
                 pickerDialog = new DatePickerDialog(getActivity(),onFormDateSelectedListener,year,month,day);
+                pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
                 pickerDialog.show();
 
                 break;
             case R.id.toDateValue:
-                pickerDialog = new DatePickerDialog(getActivity(),onToDateSelectedListener,year,month+1,day);
+                pickerDialog = new DatePickerDialog(getActivity(),onToDateSelectedListener,year,month,day);
+                pickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
                 pickerDialog.show();
                 break;
             case R.id.eventCreateBtn:
 
                 destination = destinationET.getText().toString();
                 budget = Integer.parseInt(budgetET.getText().toString()); /*imply condition*/
-                createEvent.createEventClicked(destination,budget,fdate,tdate);
+                createEvent.createEventClicked(destination,budget,fdate,tdate,lat,lon);
 
                 break;
 
@@ -125,7 +128,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener{
     }
 
     public interface CreateEvent{
-         void createEventClicked(String destination, int budget, String fromDate, String toDate);
+         void createEventClicked(String destination, int budget, String fromDate, String toDate,double lattitude,double logitude);
     }
 }
 

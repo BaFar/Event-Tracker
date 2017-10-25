@@ -68,6 +68,7 @@ public class CommingEventFragment extends Fragment {
                     SingleEventFragment fragment = new SingleEventFragment();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable("single event",eventList.get(position));
+                    bundle.putInt("event position",position);
                     fragment.setArguments(bundle);
                     ft.replace(R.id.eventFragmentContainer,fragment);
                     ft.commit();
